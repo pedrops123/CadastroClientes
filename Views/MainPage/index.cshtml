@@ -1,0 +1,46 @@
+
+@{
+    Layout = "_Layout";
+}
+
+<div id="toolbar">
+    <div class="titleToolbar">
+        REGISTROS CADASTRADOS
+    </div>
+    <div></div>
+</div>
+<div id="content">
+   @Html.Partial("ModalCadastro/ModalCadastro.cshtml")
+    <div class="row-button">
+        <div></div>
+        <div class="content-button"><button>NOVO</button></div>
+    </div>
+    <div class="grid-content">
+        <div id="cabecalho_grid">
+            <div class="title_grid">Nome</div>
+            <div class="title_grid" >Email</div>
+            <div class="title_grid">Telefone</div>
+            <div class="title_grid">Endereço</div>
+            <div class="title_grid">Cidade</div>
+        </div>
+        <div id="result-grid">
+            <div class="tile_result_grid">Nome Teste</div>
+            <div class="tile_result_grid" >Email teste</div>
+            <div class="tile_result_grid">Telefone teste</div>
+            <div class="tile_result_grid">Rua Demetrio Calfat , Nº 324 , Cotia , bla bla bla bla bla bla ba</div>
+            <div class="tile_result_grid">Cidade teste</div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    Pedro Furlan &copy; -  Projeto Cadastro Clientes
+</div>
+
+
+<script>
+    $(".content-button button").click(()=>{
+           $("#modal").removeClass("modal hide");
+           $("#modal").addClass("modal");
+           $("#area-form").animate({scrollTop:'0px'})
+    });
+</script>

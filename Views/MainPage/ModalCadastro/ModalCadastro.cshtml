@@ -1,0 +1,128 @@
+<style>
+    .modal
+    {
+         width: 56%;
+        height: 63%;
+        position: absolute;
+        display:grid;
+        grid-template-rows: 5vh 1fr 7vh;
+        transition:0.4s;
+        opacity: 1;
+    }
+
+     .modal.hide
+    {
+        transition:0.4s;
+        opacity: 0;
+    }
+
+    #area-header{
+       background-color: #020253;
+       color:white;
+       display: grid;
+       grid-template-columns:1fr 1fr;
+    }
+
+    #area-form , #area-buttons {
+        background-color: white;
+    }
+
+
+    #area-form{
+        overflow-y: auto;
+    }
+
+    #area-close {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        margin-right: 6px;
+        margin-top: -3px;
+    }
+
+    #area-close > span{
+        cursor:pointer;
+        user-select: none;
+    }
+
+    #area-buttons{
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+    }
+
+    #area-buttons > button{
+        width: 72px;
+        height: 29px;
+        font-size: 8pt;
+        margin-right: 10px;
+    } 
+
+    .form-group{
+        padding: 27px;
+    }
+
+    #area-title-modal{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+
+<div id="modal" class="modal hide">
+    <div id="area-header">
+        <div id="area-title-modal">
+            Cadastro de Contatos
+        </div>
+        <div id="area-close"><span>X</span></div>
+    </div>
+    <div id="area-form">
+        <div hidden="true" id="topo"></div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Nome</label>
+            <input type="text" class="form-control" id="cmp_nome" placeholder="Nome">
+         </div>
+         <div class="form-group">
+            <label for="exampleFormControlInput1">Email</label>
+            <input type="email" class="form-control" id="cmp_email" placeholder="E-mail">
+         </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Telefone</label>
+            <input type="tel" class="form-control" id="cmp_telefone" placeholder="Telefone">
+         </div>
+         <div class="form-group">
+            <label for="exampleFormControlInput1">Endereço</label>
+            <input type="text" class="form-control" id="cmp_end" placeholder="Endereço">
+         </div>
+         <div class="form-group">
+            <label for="exampleFormControlInput1">Cidade</label>
+            <input type="text" class="form-control" id="cmp_cdd" placeholder="Cidade">
+         </div>
+    </div>
+    <div id="area-buttons">
+        <button onclick="limparCampos()" class="btn btn-danger">LIMPAR</button>
+        <button class="btn btn-success">SALVAR</button>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $("#area-close").click(()=>{
+        $("#modal").removeClass("modal");
+        $("#modal").addClass("modal hide");
+        limparCampos();
+        $("#topo").scroll();
+    });
+
+
+    var limparCampos = () => { 
+        $("#cmp_nome").val('');
+        $("#cmp_email").val('');
+        $("#cmp_telefone").val('');
+        $("#cmp_end").val('');
+        $("#cmp_cdd").val('');
+    }
+
+</script>

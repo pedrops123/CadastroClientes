@@ -1,0 +1,37 @@
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\appsettings.json
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\Sistema Cadastro Clientes.exe
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\Sistema Cadastro Clientes.deps.json
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\Sistema Cadastro Clientes.runtimeconfig.json
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\Sistema Cadastro Clientes.runtimeconfig.dev.json
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\Sistema Cadastro Clientes.dll
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\ref\Sistema Cadastro Clientes.dll
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\Sistema Cadastro Clientes.pdb
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\Sistema Cadastro Clientes.Views.dll
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\Sistema Cadastro Clientes.Views.pdb
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.csproj.AssemblyReference.cache
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.AssemblyInfoInputs.cache
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.AssemblyInfo.cs
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.csproj.CoreCompileInputs.cache
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.RazorAssemblyInfo.cache
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.RazorAssemblyInfo.cs
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\staticwebassets\Sistema Cadastro Clientes.StaticWebAssets.Manifest.cache
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\staticwebassets\Sistema Cadastro Clientes.StaticWebAssets.xml
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\scopedcss\bundle\Sistema Cadastro Clientes.styles.css
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.TagHelpers.input.cache
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.TagHelpers.output.cache
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.RazorCoreGenerate.cache
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.RazorTargetAssemblyInfo.cache
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.RazorTargetAssemblyInfo.cs
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.Views.pdb
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.dll
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\ref\Sistema Cadastro Clientes.dll
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.pdb
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.genruntimeconfig.cache
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.csproj.CopyComplete
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Razor\Views\MainPage\index.cshtml.g.cs
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Razor\Views\MainPage\ModalCadastro\ModalCadastro.cshtml.g.cs
