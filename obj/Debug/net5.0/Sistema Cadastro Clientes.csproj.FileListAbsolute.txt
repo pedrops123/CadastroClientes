@@ -35,3 +35,5 @@ C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cad
 C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.csproj.CopyComplete
 C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Razor\Views\MainPage\index.cshtml.g.cs
 C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Razor\Views\MainPage\ModalCadastro\ModalCadastro.cshtml.g.cs
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Razor\Views\Shared\footer\_footer.cshtml.g.cs
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Razor\Views\Shared\header\_header.cshtml.g.cs

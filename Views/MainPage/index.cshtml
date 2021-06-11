@@ -3,17 +3,12 @@
     Layout = "_Layout";
 }
 
-<div id="toolbar">
-    <div class="titleToolbar">
-        REGISTROS CADASTRADOS
-    </div>
-    <div></div>
-</div>
+@Html.Partial("../Shared/header/_header.cshtml")
 <div id="content">
    @Html.Partial("ModalCadastro/ModalCadastro.cshtml")
     <div class="row-button">
         <div></div>
-        <div class="content-button"><button>NOVO</button></div>
+        <div class="content-button"><button><span class="fa fa-plus"></span>&nbsp;&nbsp;NOVO</button></div>
     </div>
     <div class="grid-content">
         <div id="cabecalho_grid">
@@ -23,24 +18,63 @@
             <div class="title_grid">Endereço</div>
             <div class="title_grid">Cidade</div>
         </div>
-        <div id="result-grid">
-            <div class="tile_result_grid">Nome Teste</div>
-            <div class="tile_result_grid" >Email teste</div>
-            <div class="tile_result_grid">Telefone teste</div>
-            <div class="tile_result_grid">Rua Demetrio Calfat , Nº 324 , Cotia , bla bla bla bla bla bla ba</div>
-            <div class="tile_result_grid">Cidade teste</div>
-        </div>
+        <div id="result-grid"></div>
     </div>
 </div>
-<div id="footer">
-    Pedro Furlan &copy; -  Projeto Cadastro Clientes
-</div>
-
+@Html.Partial("../Shared/footer/_footer.cshtml")
 
 <script>
+
+    $(document).ready(()=>{
+        AppendData();
+    })
+        
+    
+
     $(".content-button button").click(()=>{
+           $("#modal").removeAttr("hidden");
            $("#modal").removeClass("modal hide");
            $("#modal").addClass("modal");
+           $("#fundo_backdrop").removeClass("backdrop hide");
+           $("#fundo_backdrop").addClass("backdrop");
            $("#area-form").animate({scrollTop:'0px'})
     });
+
+
+
+    function AppendData(){
+        var ArrayData = [
+        {
+            NomeCliente:'Rosivaldo da silva',
+            Email:'Rosi_Valdo@hotmail.com',
+            Tel:'43167234',
+            End:'Rua Filadelfia Nº 432',
+            Cdd:'Cotia'
+        },{
+            NomeCliente:'Maria Celestino Celestial',
+            Email:'CelesteMa@gmail.com.br',
+            Tel:'1234313',
+            End:'Rua Tiradentes Nº 123',
+            Cdd:'São Paulo'
+        },{
+            NomeCliente:'Adriane Ferreira Souza',
+            Email:'drianeSouza@hotmail.com',
+            Tel:'231231231',
+            End:'Rua da Gloria , 456',
+            Cdd:'Itapevi'
+        }];
+
+        ArrayData.map((r)=>{
+               $("#result-grid").append(`
+          
+            <div class="tile_result_grid">${ r.NomeCliente }</div>
+            <div class="tile_result_grid" >${ r.Email }</div>
+            <div class="tile_result_grid">${ r.Tel }</div>
+            <div class="tile_result_grid">${ r.End }</div>
+            <div class="tile_result_grid">${ r.Cdd }</div>
+          
+            `)
+        })
+    }
+
 </script>

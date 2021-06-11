@@ -1,20 +1,28 @@
 <style>
     .modal
     {
-         width: 56%;
+        width: 56%;
         height: 63%;
         position: absolute;
         display:grid;
         grid-template-rows: 5vh 1fr 7vh;
         transition:0.4s;
         opacity: 1;
+        min-width: 219px;
     }
 
      .modal.hide
     {
-        transition:0.4s;
         opacity: 0;
+        animation:animation-hide 0.6s;
     }
+
+
+   .modal.hide > #area-form > .form-group > input , .modal.hide > #area-buttons > button
+    {
+        display: none;
+    }
+
 
     #area-header{
        background-color: #020253;
@@ -52,7 +60,7 @@
     }
 
     #area-buttons > button{
-        width: 72px;
+        width: 90px;
         height: 29px;
         font-size: 8pt;
         margin-right: 10px;
@@ -66,43 +74,69 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        user-select: none;
+    }
+
+
+
+    @@keyframes animation-hide {
+      from{
+          opacity: 1;
+          visibility: visible;
+      }
+      to{
+          opacity: 0;
+          visibility: hidden;
+      }
+
+    }
+
+    .backdrop 
+    {
+        width: 100%;
+        height: 85%;
+        background-color: rgba(0,0,0,0.3);
+        position:absolute;
+    }
+
+    .backdrop.hide {
+        display: none;
     }
 
 </style>
-
-<div id="modal" class="modal hide">
+<div id="fundo_backdrop" class="backdrop hide"></div>
+<div hidden id="modal"  class="modal hide">
     <div id="area-header">
         <div id="area-title-modal">
             Cadastro de Contatos
         </div>
-        <div id="area-close"><span>X</span></div>
+        <div id="area-close"><span class="fa fa-times"></span></div>
     </div>
     <div id="area-form">
-        <div hidden="true" id="topo"></div>
           <div class="form-group">
-            <label for="exampleFormControlInput1">Nome</label>
+            <label for="cmp_nome">Nome</label>
             <input type="text" class="form-control" id="cmp_nome" placeholder="Nome">
          </div>
          <div class="form-group">
-            <label for="exampleFormControlInput1">Email</label>
+            <label for="cmp_email">Email</label>
             <input type="email" class="form-control" id="cmp_email" placeholder="E-mail">
          </div>
           <div class="form-group">
-            <label for="exampleFormControlInput1">Telefone</label>
+            <label for="cmp_telefone">Telefone</label>
             <input type="tel" class="form-control" id="cmp_telefone" placeholder="Telefone">
          </div>
          <div class="form-group">
-            <label for="exampleFormControlInput1">Endereço</label>
+            <label for="cmp_end">Endereço</label>
             <input type="text" class="form-control" id="cmp_end" placeholder="Endereço">
          </div>
          <div class="form-group">
-            <label for="exampleFormControlInput1">Cidade</label>
+            <label for="cmp_cdd">Cidade</label>
             <input type="text" class="form-control" id="cmp_cdd" placeholder="Cidade">
          </div>
     </div>
     <div id="area-buttons">
-        <button onclick="limparCampos()" class="btn btn-danger">LIMPAR</button>
-        <button class="btn btn-success">SALVAR</button>
+        <button onclick="limparCampos()" class="btn btn-danger"><span class="fa fa-eraser"></span> &nbsp;LIMPAR</button>
+        <button id="saveCadastro" class="btn btn-success"><span class="fa fa-save"></span> &nbsp; SALVAR</button>
     </div>
 </div>
 
@@ -110,11 +144,25 @@
 <script type="text/javascript">
 
     $("#area-close").click(()=>{
+       resetModalCadastro();
+    });
+
+    $("#fundo_backdrop").click(()=>{
+       resetModalCadastro();
+    });
+
+    $("#saveCadastro").click(()=>{
+        
+    });
+
+
+    var resetModalCadastro = ()=>{
         $("#modal").removeClass("modal");
         $("#modal").addClass("modal hide");
+        $("#fundo_backdrop").removeClass("backdrop");
+        $("#fundo_backdrop").addClass("backdrop hide");
         limparCampos();
-        $("#topo").scroll();
-    });
+    }
 
 
     var limparCampos = () => { 
