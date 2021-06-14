@@ -1,3 +1,5 @@
+@model Sistema_Cadastro_Clientes.Models.tblCliente;
+
 <style>
     .modal
     {
@@ -110,32 +112,38 @@
         <div id="area-title-modal">
             Cadastro de Contatos
         </div>
-        <div id="area-close"><span class="fa fa-times"></span></div>
+        <div id="area-close"><span id="close-icon" class="fa fa-times"></span></div>
     </div>
     <div id="area-form">
           <div class="form-group">
             <label for="cmp_nome">Nome</label>
             <input type="text" class="form-control" id="cmp_nome" placeholder="Nome">
+            <div class="invalid-feedback">Campo Nome nao pode ser vazio.</div>
          </div>
          <div class="form-group">
             <label for="cmp_email">Email</label>
             <input type="email" class="form-control" id="cmp_email" placeholder="E-mail">
+             <div class="invalid-feedback">Campo E-mail nao pode ser vazio.</div>
+             <div id="validation-error-email" class="invalid-feedback">Campo email nao esta no formato correto.</div>
          </div>
           <div class="form-group">
             <label for="cmp_telefone">Telefone</label>
             <input type="tel" class="form-control" id="cmp_telefone" placeholder="Telefone">
+             <div class="invalid-feedback">Campo Telefone nao pode ser vazio.</div>
          </div>
          <div class="form-group">
             <label for="cmp_end">Endereço</label>
             <input type="text" class="form-control" id="cmp_end" placeholder="Endereço">
+            <div class="invalid-feedback">Campo Endereço nao pode ser vazio.</div>
          </div>
          <div class="form-group">
             <label for="cmp_cdd">Cidade</label>
             <input type="text" class="form-control" id="cmp_cdd" placeholder="Cidade">
+             <div class="invalid-feedback">Campo Cidade nao pode ser vazio.</div>
          </div>
     </div>
     <div id="area-buttons">
-        <button onclick="limparCampos()" class="btn btn-danger"><span class="fa fa-eraser"></span> &nbsp;LIMPAR</button>
+        <button type="submit" onclick="limparCampos()" class="btn btn-danger"><span class="fa fa-eraser"></span> &nbsp;LIMPAR</button>
         <button id="saveCadastro" class="btn btn-success"><span class="fa fa-save"></span> &nbsp; SALVAR</button>
     </div>
 </div>
@@ -143,28 +151,75 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
 
-    $("#area-close").click(()=>{
+    // Coleta os valores dos inputs do form cadastro Clientes
+    function getValoresForm(){
+        obj = {
+           nome: $("#cmp_nome").val(),
+           email:$("#cmp_email").val(),
+           telefone:$("#cmp_telefone").val(),
+           endereco:$("#cmp_end").val(),
+           cidade:$("#cmp_cdd").val()
+         }
+         return obj;
+    }
+
+    // Evento click botao close formulario
+    $("#close-icon").click(()=>{
        resetModalCadastro();
     });
 
+    // Evento click fundo backdrop 
     $("#fundo_backdrop").click(()=>{
        resetModalCadastro();
     });
 
+    // Salva os valores do formulario
     $("#saveCadastro").click(()=>{
+
+        var objetoFormulario = getValoresForm();
+        if(objetoFormulario.nome == ""){
+            $("#cmp_nome").addClass("is-invalid");
+        }
+        else{
+            $("#cmp_nome").removeClass("is-invalid");
+        }
+
+        if(objetoFormulario.email == ""){
+             $("#cmp_email").addClass("is-invalid");
+        }
+        else{
+             $("#cmp_email").removeClass("is-invalid");
+        }
+
+
+        var testEmail = /^[A-Z0-9._%+-]+@@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+        if(testEmail.test(objetoFormulario.email)){
+           
+             $("#validation-error-email").hide();
+        }
+        else{
+          
+            $("#validation-error-email").show();
+        }
         
+
     });
 
+    // Function reset Modal Cadastro
 
     var resetModalCadastro = ()=>{
         $("#modal").removeClass("modal");
         $("#modal").addClass("modal hide");
         $("#fundo_backdrop").removeClass("backdrop");
         $("#fundo_backdrop").addClass("backdrop hide");
+        $("#cmp_nome").removeClass("is-invalid");
+        $("#cmp_email").removeClass("is-invalid");
+        $("#area-form").animate({scrollTop:'0px'})
         limparCampos();
     }
 
 
+    // Function limpar campos gerais
     var limparCampos = () => { 
         $("#cmp_nome").val('');
         $("#cmp_email").val('');

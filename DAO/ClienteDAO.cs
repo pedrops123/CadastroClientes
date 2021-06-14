@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Sistema_Cadastro_Clientes.Models;
+using System.Data.SqlClient;
+using Dapper;
+using System.Linq;
 
 namespace  Sistema_Cadastro_Clientes.DAO
 {
@@ -17,26 +20,83 @@ namespace  Sistema_Cadastro_Clientes.DAO
         
         
         public tblCliente getClienteById(int id){
-            return new tblCliente();
+            tblCliente cliente = new tblCliente();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(_connectionStrings)){
+                    con.Open();
+                    cliente = con.Query<tblCliente>($"SELECT * FROM TesteDB.dbo.tblCliente WHERE CodCliente = {id}").FirstOrDefault();
+                    con.Close();
+                }
+            }
+            catch(Exception e){
+                throw e;
+            }
+            return cliente;
         }
 
         
         public List<tblCliente> getClientes(){
-            return new List<tblCliente>();
+            List<tblCliente> clientes = new List<tblCliente>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(_connectionStrings)){
+                    con.Open();
+                    clientes = con.Query<tblCliente>($"SELECT * FROM TesteDB.dbo.tblCliente").ToList();
+                    con.Close();
+                }
+            }
+            catch(Exception e){
+                throw e;
+            }
+            return clientes;
         }
 
-        public tblCliente PostCliente(){
-            return new tblCliente();
+        public tblCliente PostCliente(tblCliente cliente){
+            try
+            {
+                using (SqlConnection con = new SqlConnection(_connectionStrings)){
+                    con.Open();
+                    var retorno =  con.Execute($"INSERT INTO TesteDB.dbo.tblCliente VALUES('{cliente.DescCliente}', {cliente.CodPais} ,'{cliente.DDD}','{cliente.Fone}',{cliente.CodSexo},'{cliente.Email}','{cliente.Endereco}','{cliente.Cidade}')");
+                    con.Close();
+                }
+            }
+            catch(Exception e){
+                throw e;
+            }
+            return cliente;
         }
 
 
-        public tblCliente PutCliente(){
-            return new tblCliente();
+        public tblCliente PutCliente(tblCliente cliente){
+             try
+            {
+                using (SqlConnection con = new SqlConnection(_connectionStrings)){
+                    con.Open();
+                    var retorno =  con.Execute($"UPDATE TesteDB.dbo.tblCliente SET DescCliente = '{cliente.DescCliente}' , CodPais = {cliente.CodPais} , DDD = '{cliente.DDD}' , Fone = '{cliente.Fone}' , CodSexo = {cliente.CodSexo} , Email = '{cliente.Email}' , Endereco = '{cliente.Endereco}' ,Cidade = '{cliente.Cidade}' WHERE CodCliente = {cliente.CodCliente}");
+                    con.Close();
+                }
+            }
+            catch(Exception e){
+                throw e;
+            }
+            return cliente;
         }
 
 
-        public tblCliente DeleteCliente(){
-            return new tblCliente();
+        public tblCliente DeleteCliente(tblCliente cliente){
+             try
+            {
+                using (SqlConnection con = new SqlConnection(_connectionStrings)){
+                    con.Open();
+                    con.Execute($"DELETE FROM TesteDB.dbo.tblCliente where CodCliente = ${cliente.CodCliente}");
+                    con.Close();
+                }
+            }
+            catch(Exception e){
+                throw e;
+            }
+            return cliente;
         }
 
 

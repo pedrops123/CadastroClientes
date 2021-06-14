@@ -39,6 +39,16 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.2, )"
+            },
+            "dapper": {
+              "target": "Package",
+              "version": "[2.0.90, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

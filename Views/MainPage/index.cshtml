@@ -17,20 +17,30 @@
             <div class="title_grid">Telefone</div>
             <div class="title_grid">Endereço</div>
             <div class="title_grid">Cidade</div>
+            <div class="title_grid">Ações</div>
         </div>
         <div id="result-grid"></div>
     </div>
 </div>
+
 @Html.Partial("../Shared/footer/_footer.cshtml")
 
 <script>
 
+    // Seta Valores e parametros ao iniciar a pagina 
     $(document).ready(()=>{
+        
+        // Inicia datatable
         AppendData();
+        // Seta mascaras 
+        $('#cmp_telefone').mask('(00) 00000-0000');
+
+        //Inicia tooltips 
+         $('[data-toggle="tooltip"]').tooltip() 
     })
         
     
-
+    // Click event botão novo
     $(".content-button button").click(()=>{
            $("#modal").removeAttr("hidden");
            $("#modal").removeClass("modal hide");
@@ -41,22 +51,25 @@
     });
 
 
-
+    // Coleta registros cadastrados para o datatable
     function AppendData(){
         var ArrayData = [
         {
+            id:1,
             NomeCliente:'Rosivaldo da silva',
             Email:'Rosi_Valdo@hotmail.com',
             Tel:'43167234',
             End:'Rua Filadelfia Nº 432',
             Cdd:'Cotia'
         },{
+            id:2,
             NomeCliente:'Maria Celestino Celestial',
             Email:'CelesteMa@gmail.com.br',
             Tel:'1234313',
             End:'Rua Tiradentes Nº 123',
             Cdd:'São Paulo'
         },{
+            id:3,
             NomeCliente:'Adriane Ferreira Souza',
             Email:'drianeSouza@hotmail.com',
             Tel:'231231231',
@@ -72,6 +85,10 @@
             <div class="tile_result_grid">${ r.Tel }</div>
             <div class="tile_result_grid">${ r.End }</div>
             <div class="tile_result_grid">${ r.Cdd }</div>
+            <div class="tile_result_grid">
+                <span data-toggle="tooltip" data-placement="top" title="Editar" id="pencil-action action-datatable" class="fa fa-pencil fa-2x action-datatable"></span> &nbsp;&nbsp;&nbsp;&nbsp;
+                <span data-toggle="tooltip" data-placement="top" title="Excluir" id="trash-action" class="fa fa-trash fa-2x action-datatable"></span>
+            </div>
           
             `)
         })
