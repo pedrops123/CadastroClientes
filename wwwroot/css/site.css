@@ -113,7 +113,12 @@ body
 }
 
 .action-datatable{
-   cursor: pointer;
+   cursor: pointer !important;
+}
+
+#content > #fundo_backdrop{
+  width: 100%;
+  top: 0;
 }
 
 

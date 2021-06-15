@@ -1,71 +1,68 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
-using Sistema_Cadastro_Clientes.Models;
 using System.Data.SqlClient;
-using Dapper;
 using System.Linq;
-using Microsoft.Extensions.Logging;
+using Dapper;
+using Microsoft.Extensions.Configuration;
 using Sistema_Cadastro_Clientes.Interfaces;
 
-
-namespace  Sistema_Cadastro_Clientes.DAO
+namespace Sistema_Cadastro_Clientes.Models
 {
-
     /// <summary>
-    /// Classe DAO Cliente
-    /// Contem todos os metodos Data Access Object da tabela tblCliente
+    /// Classe DAO Pais
+    /// Contem todos os metodos Data Access Object da tabela tblPais
     /// </summary>
-    public class ClienteDAO :InterfaceDAO<tblCliente> 
-    {
+    public class PaisDAO : InterfaceDAO<tblPais> {
         private static  IConfiguration _conf;
-        private string _connectionStrings = "";
-        public ClienteDAO(IConfiguration conf) {  
+         private string _connectionStrings = "";
+      
+        public PaisDAO(IConfiguration conf) {
             _conf = conf;
             this._connectionStrings = _conf.GetConnectionString("DbCliente");
         } 
-        
-        public tblCliente GetById(tblCliente data)
+         
+
+        public tblPais GetById(tblPais data)
         {
-           tblCliente cliente = new tblCliente();
+            tblPais pais = new tblPais();
             try
             {
                 using (SqlConnection con = new SqlConnection(_connectionStrings)){
                     con.Open();
-                    cliente = con.Query<tblCliente>($"SELECT * FROM TesteDB.dbo.tblCliente WHERE CodCliente = { data.CodCliente }").FirstOrDefault();
+                    pais = con.Query<tblPais>($"SELECT * FROM TesteDB.dbo.tblPais where CodPais = {data.CodPais}").FirstOrDefault();
                     con.Close();
                 }
             }
             catch(Exception e){
                 throw e;
             }
-            return cliente;
+            return pais;
         }
 
-        public List<tblCliente> GetList()
+        public List<tblPais> GetList()
         {
-            List<tblCliente> clientes = new List<tblCliente>();
+            List<tblPais> paises = new List<tblPais>();
             try
             {
                 using (SqlConnection con = new SqlConnection(_connectionStrings)){
                     con.Open();
-                    clientes = con.Query<tblCliente>($"SELECT * FROM TesteDB.dbo.tblCliente").ToList();
+                    paises = con.Query<tblPais>($"SELECT * FROM TesteDB.dbo.tblPais").ToList();
                     con.Close();
                 }
             }
             catch(Exception e){
                 throw e;
             }
-            return clientes;
+            return paises;
         }
 
-        public tblCliente PostData(tblCliente data)
+        public tblPais PostData(tblPais data)
         {
             try
             {
                 using (SqlConnection con = new SqlConnection(_connectionStrings)){
                     con.Open();
-                    var retorno =  con.Execute($"INSERT INTO TesteDB.dbo.tblCliente VALUES('{data.DescCliente}', {data.CodPais} ,'{data.DDD}','{data.Fone}',{data.CodSexo},'{data.Email}','{data.Endereco}','{data.Cidade}')");
+                    var retorno =  con.Execute($"INSERT INTO TesteDB.dbo.tblPais VALUES ('{data.DescPais}')");
                     con.Close();
                 }
             }
@@ -75,13 +72,13 @@ namespace  Sistema_Cadastro_Clientes.DAO
             return data;
         }
 
-        public tblCliente PutData(tblCliente data)
+        public tblPais PutData(tblPais data)
         {
              try
             {
                 using (SqlConnection con = new SqlConnection(_connectionStrings)){
                     con.Open();
-                    var retorno =  con.Execute($"UPDATE TesteDB.dbo.tblCliente SET DescCliente = '{data.DescCliente}' , CodPais = {data.CodPais} , DDD = '{data.DDD}' , Fone = '{data.Fone}' , CodSexo = {data.CodSexo} , Email = '{data.Email}' , Endereco = '{data.Endereco}' ,Cidade = '{data.Cidade}' WHERE CodCliente = {data.CodCliente}");
+                    var retorno =  con.Execute($"UPDATE TesteDB.dbo.tblPais  SET DescPais = '{data.DescPais}' where CodPais = {data.CodPais}");
                     con.Close();
                 }
             }
@@ -91,13 +88,13 @@ namespace  Sistema_Cadastro_Clientes.DAO
             return data;
         }
 
-        public tblCliente DeleteData(tblCliente data)
+        public tblPais DeleteData(tblPais data)
         {
-            try
+         try
             {
                 using (SqlConnection con = new SqlConnection(_connectionStrings)){
                     con.Open();
-                    con.Execute($"DELETE FROM TesteDB.dbo.tblCliente where CodCliente = ${data.CodCliente}");
+                    var retorno =  con.Execute($"DELETE TesteDB.dbo.tblPais WHERE CodPais = {data.CodPais}");
                     con.Close();
                 }
             }
@@ -107,4 +104,5 @@ namespace  Sistema_Cadastro_Clientes.DAO
             return data;
         }
     }
+       
 }

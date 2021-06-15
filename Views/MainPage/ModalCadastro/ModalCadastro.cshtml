@@ -5,7 +5,7 @@
     {
         width: 56%;
         height: 63%;
-        position: absolute;
+        position: fixed;
         display:grid;
         grid-template-rows: 5vh 1fr 7vh;
         transition:0.4s;
@@ -96,9 +96,9 @@
     .backdrop 
     {
         width: 100%;
-        height: 85%;
+        height: 100%;
         background-color: rgba(0,0,0,0.3);
-        position:absolute;
+        position:fixed;
     }
 
     .backdrop.hide {
@@ -114,32 +114,43 @@
         </div>
         <div id="area-close"><span id="close-icon" class="fa fa-times"></span></div>
     </div>
+    <div id="idCliente" hidden="hidden"></div>
     <div id="area-form">
           <div class="form-group">
-            <label for="cmp_nome">Nome</label>
-            <input type="text" class="form-control" id="cmp_nome" placeholder="Nome">
+              @Html.LabelFor(r => r.DescCliente , new { @for="cmp_nome" })
+              @Html.TextBoxFor(r => r.DescCliente , new { @id="cmp_nome" , @class="form-control", @placeholder="Nome Cliente" })
             <div class="invalid-feedback">Campo Nome nao pode ser vazio.</div>
          </div>
          <div class="form-group">
-            <label for="cmp_email">Email</label>
-            <input type="email" class="form-control" id="cmp_email" placeholder="E-mail">
+             @Html.LabelFor(r=>r.CodSexo , new { @for="cmp_sexo" })
+             @Html.DropDownListFor(r => r.CodSexo , new List<SelectListItem> { new SelectListItem() { Text = "..." , Value = "0" } } ,  new { @id="cmp_sexo" , @class="form-control", @placeholder="Sexo" })
+             <div class="invalid-feedback">Campo Sexo nao pode ser vazio.</div>
+         </div>
+         <div class="form-group">
+             @Html.LabelFor(r=>r.Email , new {@for="cmp_email"})
+             @Html.TextBoxFor(r => r.Email , new { @id="cmp_email" , @class="form-control", @placeholder="E-mail" })
              <div class="invalid-feedback">Campo E-mail nao pode ser vazio.</div>
              <div id="validation-error-email" class="invalid-feedback">Campo email nao esta no formato correto.</div>
          </div>
           <div class="form-group">
-            <label for="cmp_telefone">Telefone</label>
-            <input type="tel" class="form-control" id="cmp_telefone" placeholder="Telefone">
+             @Html.LabelFor(r=> r.TelefoneCompleto , new {@for="cmp_telefone"})
+             @Html.TextBoxFor(r => r.TelefoneCompleto , new { @id="cmp_telefone" , @class="form-control", @placeholder="Telefone" })
              <div class="invalid-feedback">Campo Telefone nao pode ser vazio.</div>
          </div>
          <div class="form-group">
-            <label for="cmp_end">Endereço</label>
-            <input type="text" class="form-control" id="cmp_end" placeholder="Endereço">
+             @Html.LabelFor(r=> r.Endereco , new {@for="cmp_end"})
+             @Html.TextBoxFor(r => r.Endereco , new { @id="cmp_end" , @class="form-control", @placeholder="Endereço" })
             <div class="invalid-feedback">Campo Endereço nao pode ser vazio.</div>
          </div>
          <div class="form-group">
-            <label for="cmp_cdd">Cidade</label>
-            <input type="text" class="form-control" id="cmp_cdd" placeholder="Cidade">
+             @Html.LabelFor(r=> r.Cidade , new {@for="cmp_cdd"})
+             @Html.TextBoxFor(r => r.Cidade , new { @id="cmp_cdd" , @class="form-control", @placeholder="Cidade" })
              <div class="invalid-feedback">Campo Cidade nao pode ser vazio.</div>
+         </div>
+         <div class="form-group">
+             @Html.LabelFor(r=> r.CodPais , new {@for="cmp_pais"})
+             @Html.DropDownListFor(r => r.CodPais , new List<SelectListItem> { new SelectListItem() { Text = "..." , Value = "0" } } ,  new { @id="cmp_pais" , @class="form-control", @placeholder="Pais" })
+             <div class="invalid-feedback">Campo Pais nao pode ser vazio.</div>
          </div>
     </div>
     <div id="area-buttons">
@@ -154,13 +165,27 @@
     // Coleta os valores dos inputs do form cadastro Clientes
     function getValoresForm(){
         obj = {
-           nome: $("#cmp_nome").val(),
-           email:$("#cmp_email").val(),
-           telefone:$("#cmp_telefone").val(),
-           endereco:$("#cmp_end").val(),
-           cidade:$("#cmp_cdd").val()
+           CodCliente: $("#idCliente").val(),
+           DescCliente: $("#cmp_nome").val(),
+           CodSexo:$("#cmp_sexo").val(),
+           Email:$("#cmp_email").val(),
+           TelefoneCompleto:$("#cmp_telefone").val(),
+           Endereco:$("#cmp_end").val(),
+           Cidade:$("#cmp_cdd").val(),
+           CodPais:$("#cmp_pais").val()
          }
          return obj;
+    }
+    // Seta os valores dos inputs do form cadastro Clientes
+    function SetValoresForm({ codCliente , DescCliente , CodSexo , Email , TelefoneCompleto , Endereco , Cidade , CodPais}){
+          $("#idCliente").val(codCliente);
+          $("#cmp_nome").val(DescCliente);
+          $("#cmp_sexo").val(CodSexo);
+          $("#cmp_email").val(Email);
+          $("#cmp_telefone").val(TelefoneCompleto);
+          $("#cmp_end").val(Endereco);
+          $("#cmp_cdd").val(Cidade);
+          $("#cmp_pais").val(CodPais);
     }
 
     // Evento click botao close formulario
@@ -175,34 +200,101 @@
 
     // Salva os valores do formulario
     $("#saveCadastro").click(()=>{
-
+        var validacao = true;
         var objetoFormulario = getValoresForm();
-        if(objetoFormulario.nome == ""){
+
+        // Validacao Nome Cliente
+        if(objetoFormulario.DescCliente == ""){
             $("#cmp_nome").addClass("is-invalid");
+            validacao = false;
         }
         else{
             $("#cmp_nome").removeClass("is-invalid");
         }
 
-        if(objetoFormulario.email == ""){
+        // Validacao Pais
+        if(objetoFormulario.CodPais == "0"){
+            $("#cmp_pais").addClass("is-invalid");
+            validacao = false;
+        }
+        else{
+            $("#cmp_pais").removeClass("is-invalid");
+        }
+
+        // Validacao Sexo
+        if(objetoFormulario.CodSexo == "0"){
+            $("#cmp_sexo").addClass("is-invalid");
+            validacao = false;
+        }
+        else{
+            $("#cmp_sexo").removeClass("is-invalid");
+        }
+
+        // Validacao Email
+        if(objetoFormulario.Email == ""){
              $("#cmp_email").addClass("is-invalid");
+             validacao = false;
         }
         else{
              $("#cmp_email").removeClass("is-invalid");
         }
-
-
-        var testEmail = /^[A-Z0-9._%+-]+@@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
-        if(testEmail.test(objetoFormulario.email)){
-           
+        var testEmail =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+        if(testEmail.test(objetoFormulario.Email)){
              $("#validation-error-email").hide();
         }
         else{
-          
             $("#validation-error-email").show();
+            validacao = false;
+        }
+
+
+        // Validacao Endereco
+        if(objetoFormulario.Endereco == ""){
+            $("#cmp_end").addClass("is-invalid");
+            validacao = false;
+        }
+        else{
+            $("#cmp_end").removeClass("is-invalid");
+        }
+
+
+        // Validacao Telefone
+        if(objetoFormulario.TelefoneCompleto == ""){
+            $("#cmp_telefone").addClass("is-invalid");
+            validacao = false;
+        }
+        else{
+            $("#cmp_telefone").removeClass("is-invalid");
+        }
+
+
+        // Validacao Cidade
+        if(objetoFormulario.Cidade == ""){
+            $("#cmp_cdd").addClass("is-invalid");
+            validacao = false;
+        }
+        else{
+            $("#cmp_cdd").removeClass("is-invalid");
         }
         
 
+        if(validacao){
+            $.ajax({
+            method:'POST',
+            dataType: "json",
+            url: 'Cliente/SalvaAtualizaCliente',
+            data:JSON.parse(objetoFormulario),
+            contentType: "application/json",
+                success: (data) => {
+                    resetModalCadastro();
+                    AppendData();
+                    alert("Dados inseridos com sucesso !");
+                },
+                error:(er) => {
+                    console.log(er);
+                }
+            });
+        }
     });
 
     // Function reset Modal Cadastro
@@ -212,20 +304,82 @@
         $("#modal").addClass("modal hide");
         $("#fundo_backdrop").removeClass("backdrop");
         $("#fundo_backdrop").addClass("backdrop hide");
-        $("#cmp_nome").removeClass("is-invalid");
-        $("#cmp_email").removeClass("is-invalid");
-        $("#area-form").animate({scrollTop:'0px'})
+         $("#cmp_nome").removeClass("is-invalid");
+        $("#cmp_sexo").removeClass("is-invalid"); 
+         $("#cmp_email").removeClass("is-invalid");
+        $("#validation-error-email").hide();
+         $("#cmp_end").removeClass("is-invalid");
+         $("#cmp_telefone").removeClass("is-invalid");
+         $("#cmp_cdd").removeClass("is-invalid");
+          $("#cmp_pais").removeClass("is-invalid");
+        $("#area-form").animate({scrollTop:'0px'});
         limparCampos();
     }
 
 
     // Function limpar campos gerais
     var limparCampos = () => { 
-        $("#cmp_nome").val('');
-        $("#cmp_email").val('');
-        $("#cmp_telefone").val('');
-        $("#cmp_end").val('');
-        $("#cmp_cdd").val('');
+         $("#cmp_nome").removeClass("is-invalid");
+         $("#cmp_sexo").removeClass("is-invalid"); 
+         $("#cmp_email").removeClass("is-invalid");
+         $("#validation-error-email").hide();
+         $("#cmp_end").removeClass("is-invalid");
+         $("#cmp_telefone").removeClass("is-invalid");
+         $("#cmp_cdd").removeClass("is-invalid");
+        $("#cmp_pais").removeClass("is-invalid");
+
+
+       SetValoresForm({
+            codCliente:"0",
+            DescCliente:'',
+            TelefoneCompleto:'',
+            Cidade:'',
+            CodPais:"0",
+            CodSexo:"0",
+            Email:'',
+            Endereco:''
+        })
     }
+
+    // Appenda Cbb Sexo 
+    var AppendSexo = ()=> {
+         $.ajax({
+            method:'GET',
+            url: 'Sexo/GetListaSexo',
+            contentType: "application/json",
+                success: (data) => {
+                    data.map(r=>{
+                       $("#cmp_sexo").append(`<option value=${r.codSexo}>${r.descSexo}</option>`);
+                    });
+                },
+                error:(er) => {
+                    console.log(er);
+                }
+            });
+    }
+
+
+    // Appenda Cbb Pais
+    var AppendPais = ()=> {
+         $.ajax({
+            method:'GET',
+            url: 'Pais/GetListaPais',
+            contentType: "application/json",
+                success: (data) => {
+                    data.map(r=>{
+                       $("#cmp_pais").append(`<option value=${r.codPais}>${r.descPais}</option>`);
+                    });
+                },
+                error:(er) => {
+                    console.log(er);
+                }
+            });
+    }
+
+
+
+
+
+
 
 </script>

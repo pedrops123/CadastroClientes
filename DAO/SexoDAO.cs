@@ -1,87 +1,67 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
-using Sistema_Cadastro_Clientes.Models;
 using System.Data.SqlClient;
-using Dapper;
 using System.Linq;
-using Microsoft.Extensions.Logging;
+using Dapper;
+using Microsoft.Extensions.Configuration;
 using Sistema_Cadastro_Clientes.Interfaces;
 
-
-namespace  Sistema_Cadastro_Clientes.DAO
+namespace Sistema_Cadastro_Clientes.Models
 {
-
-    /// <summary>
-    /// Classe DAO Cliente
-    /// Contem todos os metodos Data Access Object da tabela tblCliente
+     /// <summary>
+    /// Classe DAO Sexo
+    /// Contem todos os metodos Data Access Object da tabela tblSexo
     /// </summary>
-    public class ClienteDAO :InterfaceDAO<tblCliente> 
+    public class SexoDAO : InterfaceDAO<tblSexo>
     {
         private static  IConfiguration _conf;
-        private string _connectionStrings = "";
-        public ClienteDAO(IConfiguration conf) {  
+         private string _connectionStrings = "";
+        public SexoDAO(IConfiguration conf){
             _conf = conf;
             this._connectionStrings = _conf.GetConnectionString("DbCliente");
         } 
         
-        public tblCliente GetById(tblCliente data)
+        public tblSexo GetById(tblSexo data)
         {
-           tblCliente cliente = new tblCliente();
+            tblSexo sexo = new tblSexo();
             try
             {
                 using (SqlConnection con = new SqlConnection(_connectionStrings)){
                     con.Open();
-                    cliente = con.Query<tblCliente>($"SELECT * FROM TesteDB.dbo.tblCliente WHERE CodCliente = { data.CodCliente }").FirstOrDefault();
+                    sexo = con.Query<tblSexo>($"SELECT * FROM TesteDB.dbo.tblSexo where CodSexo = {data.CodSexo}").FirstOrDefault();
                     con.Close();
                 }
             }
             catch(Exception e){
                 throw e;
             }
-            return cliente;
+            return sexo;
         }
 
-        public List<tblCliente> GetList()
+        public List<tblSexo> GetList()
         {
-            List<tblCliente> clientes = new List<tblCliente>();
+           List<tblSexo> sexos = new List<tblSexo>();
             try
             {
                 using (SqlConnection con = new SqlConnection(_connectionStrings)){
                     con.Open();
-                    clientes = con.Query<tblCliente>($"SELECT * FROM TesteDB.dbo.tblCliente").ToList();
+                    sexos = con.Query<tblSexo>($"SELECT * FROM TesteDB.dbo.tblSexo").ToList();
                     con.Close();
                 }
             }
             catch(Exception e){
                 throw e;
             }
-            return clientes;
+            return sexos;
         }
-
-        public tblCliente PostData(tblCliente data)
+     
+        public tblSexo PostData(tblSexo data)
         {
-            try
+           try
             {
                 using (SqlConnection con = new SqlConnection(_connectionStrings)){
                     con.Open();
-                    var retorno =  con.Execute($"INSERT INTO TesteDB.dbo.tblCliente VALUES('{data.DescCliente}', {data.CodPais} ,'{data.DDD}','{data.Fone}',{data.CodSexo},'{data.Email}','{data.Endereco}','{data.Cidade}')");
-                    con.Close();
-                }
-            }
-            catch(Exception e){
-                throw e;
-            }
-            return data;
-        }
-
-        public tblCliente PutData(tblCliente data)
-        {
-             try
-            {
-                using (SqlConnection con = new SqlConnection(_connectionStrings)){
-                    con.Open();
-                    var retorno =  con.Execute($"UPDATE TesteDB.dbo.tblCliente SET DescCliente = '{data.DescCliente}' , CodPais = {data.CodPais} , DDD = '{data.DDD}' , Fone = '{data.Fone}' , CodSexo = {data.CodSexo} , Email = '{data.Email}' , Endereco = '{data.Endereco}' ,Cidade = '{data.Cidade}' WHERE CodCliente = {data.CodCliente}");
+                    var retorno =  con.Execute($"INSERT INTO TesteDB.dbo.tblSexo VALUES('{data.DescSexo}')");
                     con.Close();
                 }
             }
@@ -91,13 +71,29 @@ namespace  Sistema_Cadastro_Clientes.DAO
             return data;
         }
 
-        public tblCliente DeleteData(tblCliente data)
+        public tblSexo PutData(tblSexo data)
         {
             try
             {
                 using (SqlConnection con = new SqlConnection(_connectionStrings)){
                     con.Open();
-                    con.Execute($"DELETE FROM TesteDB.dbo.tblCliente where CodCliente = ${data.CodCliente}");
+                    var retorno =  con.Execute($"UPDATE TesteDB.dbo.tblSexo SET DescSexo = '{data.DescSexo}' WHERE CodSexo = {data.CodSexo}");
+                    con.Close();
+                }
+            }
+            catch(Exception e){
+                throw e;
+            }
+            return data;
+        }
+
+        public tblSexo DeleteData(tblSexo data)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(_connectionStrings)){
+                    con.Open();
+                    var retorno =  con.Execute($"DELETE FROM TesteDB.dbo.tblSexo WHERE CodSexo = {data.CodSexo}");
                     con.Close();
                 }
             }

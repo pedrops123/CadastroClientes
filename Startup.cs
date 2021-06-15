@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Sistema_Cadastro_Clientes.DAO;
+using Sistema_Cadastro_Clientes.Interfaces;
+using Sistema_Cadastro_Clientes.Models;
 
 namespace Sistema_Cadastro_Clientes
 {
@@ -23,12 +26,13 @@ namespace Sistema_Cadastro_Clientes
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -51,6 +55,7 @@ namespace Sistema_Cadastro_Clientes
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=MainPage}/{action=Index}/{id?}");
+
             });
         }
     }

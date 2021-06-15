@@ -1,10 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "A62PwHo8+NiJWAxc/FMuzNAlZmSZzvS+qdrGMQ9dm87cGM799SCowCLRrPbxrCmqKSnoi03E1OdKp/uNYSiSWw==",
+  "dgSpecHash": "4Cw+MbbgcxhBofZkhkEyT4UBAMW5uBRr+V9yCiVkqBfrB80Wm06rM1qtPoHMV6lVKa9jLSCb1M/j5c9A8Y/qrQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\pvfurlan\\Desktop\\Sistema Cadastro Clientes\\Sistema Cadastro Clientes.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pvfurlan\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
+    "C:\\Users\\pvfurlan\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\pvfurlan\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\pvfurlan\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\5.0.0\\microsoft.extensions.fileproviders.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\pvfurlan\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\5.0.0\\microsoft.extensions.hosting.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\pvfurlan\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
     "C:\\Users\\pvfurlan\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\pvfurlan\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\pvfurlan\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",

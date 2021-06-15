@@ -32,6 +32,9 @@
         
         // Inicia datatable
         AppendData();
+        AppendSexo();
+        AppendPais();
+        $("#idCliente").val(0);
         // Seta mascaras 
         $('#cmp_telefone').mask('(00) 00000-0000');
 
@@ -42,56 +45,90 @@
     
     // Click event botão novo
     $(".content-button button").click(()=>{
+         showModal();
+    });
+
+
+    // Coleta registros cadastrados para o datatable
+    function AppendData(){
+        $("#result-grid .tile_result_grid").remove()
+        $.ajax({
+            method:'GET',
+            url:'Cliente/GetListaClientes',
+            contentType: "application/json",
+            success: (data)=> {
+                 data.map((r)=>{
+                    $("#result-grid").append(`
+                
+                    <div class="tile_result_grid">${ r.descCliente }</div>
+                    <div class="tile_result_grid" >${ r.email }</div>
+                    <div class="tile_result_grid">(${ r.ddd }) ${r.fone}</div>
+                    <div class="tile_result_grid">${ r.endereco == null ? '' : r.endereco }</div>
+                    <div class="tile_result_grid">${ r.cidade == null ? '' : r.cidade}</div>
+                    <div class="tile_result_grid">
+                        <span data-toggle="tooltip" data-placement="top"  onclick="UpdateCliente(${r.codCliente})" title="Editar" id="pencil-action action-datatable" class="fa fa-pencil fa-2x action-datatable"></span> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span data-toggle="tooltip" data-placement="top"  onclick="deleteCliente(${r.codCliente})"  title="Excluir" id="trash-action" class="fa fa-trash fa-2x action-datatable"></span>
+                    </div>
+                
+                    `)});
+            },
+            error: (er) => {
+                console.log(er);
+            }
+        });
+    }
+
+    function UpdateCliente(codCliente){
+         $.ajax({
+            method:'GET',
+            url: 'Cliente/GetClienteByID?idCliente='+codCliente,
+            contentType: "application/json",
+                success: (data) => {
+                     SetValoresForm({
+                        codCliente:data.codCliente,
+                        DescCliente:data.descCliente,
+                        TelefoneCompleto: data.ddd + data.fone,
+                        Cidade:data.cidade == null ? '' :data.cidade ,
+                        CodPais:data.codPais,
+                        CodSexo:data.codSexo,
+                        Email:data.email,
+                        Endereco:data.endereco == null ? '' : data.endereco
+                    });
+                   
+                    showModal();
+                },
+                error:(er) => {
+                    console.log(er);
+                }
+            });
+
+    }
+
+
+
+    function deleteCliente(codCliente){
+            $.ajax({
+            method:'GET',
+            url: 'Cliente/DeletaCliente?id='+codCliente,
+            contentType: "application/json",
+                success: (data) => {
+                    AppendData();
+                },
+                error:(er) => {
+                    console.log(er);
+                }
+            });
+
+    }
+
+
+    var showModal = ()=>{
            $("#modal").removeAttr("hidden");
            $("#modal").removeClass("modal hide");
            $("#modal").addClass("modal");
            $("#fundo_backdrop").removeClass("backdrop hide");
            $("#fundo_backdrop").addClass("backdrop");
            $("#area-form").animate({scrollTop:'0px'})
-    });
-
-
-    // Coleta registros cadastrados para o datatable
-    function AppendData(){
-        var ArrayData = [
-        {
-            id:1,
-            NomeCliente:'Rosivaldo da silva',
-            Email:'Rosi_Valdo@hotmail.com',
-            Tel:'43167234',
-            End:'Rua Filadelfia Nº 432',
-            Cdd:'Cotia'
-        },{
-            id:2,
-            NomeCliente:'Maria Celestino Celestial',
-            Email:'CelesteMa@gmail.com.br',
-            Tel:'1234313',
-            End:'Rua Tiradentes Nº 123',
-            Cdd:'São Paulo'
-        },{
-            id:3,
-            NomeCliente:'Adriane Ferreira Souza',
-            Email:'drianeSouza@hotmail.com',
-            Tel:'231231231',
-            End:'Rua da Gloria , 456',
-            Cdd:'Itapevi'
-        }];
-
-        ArrayData.map((r)=>{
-               $("#result-grid").append(`
-          
-            <div class="tile_result_grid">${ r.NomeCliente }</div>
-            <div class="tile_result_grid" >${ r.Email }</div>
-            <div class="tile_result_grid">${ r.Tel }</div>
-            <div class="tile_result_grid">${ r.End }</div>
-            <div class="tile_result_grid">${ r.Cdd }</div>
-            <div class="tile_result_grid">
-                <span data-toggle="tooltip" data-placement="top" title="Editar" id="pencil-action action-datatable" class="fa fa-pencil fa-2x action-datatable"></span> &nbsp;&nbsp;&nbsp;&nbsp;
-                <span data-toggle="tooltip" data-placement="top" title="Excluir" id="trash-action" class="fa fa-trash fa-2x action-datatable"></span>
-            </div>
-          
-            `)
-        })
     }
 
 </script>
