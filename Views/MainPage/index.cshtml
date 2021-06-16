@@ -10,6 +10,10 @@
         <div></div>
         <div class="content-button"><button><span class="fa fa-plus"></span>&nbsp;&nbsp;NOVO</button></div>
     </div>
+    <div id="area-alert">
+        <div id="alert-callback" class="alert alert-warning alert-dismissible fade show" role="alert">
+        </div>
+    </div>
     <div class="grid-content">
         <div id="cabecalho_grid">
             <div class="title_grid">Nome</div>
@@ -34,12 +38,13 @@
         AppendData();
         AppendSexo();
         AppendPais();
+        $("#alert-callback").hide();
         $("#idCliente").val(0);
         // Seta mascaras 
         $('#cmp_telefone').mask('(00) 00000-0000');
 
         //Inicia tooltips 
-         $('[data-toggle="tooltip"]').tooltip() 
+         $('[data-toggle="tooltip"]').tooltip(); 
     })
         
     
@@ -94,6 +99,9 @@
                         Email:data.email,
                         Endereco:data.endereco == null ? '' : data.endereco
                     });
+
+
+                    
                    
                     showModal();
                 },
@@ -112,10 +120,19 @@
             url: 'Cliente/DeletaCliente?id='+codCliente,
             contentType: "application/json",
                 success: (data) => {
-                    AppendData();
+                    if(data != null ){
+                        AppendData();
+                         setMessageCallBack({
+                            description:'Registro deletado com sucesso !',
+                            type:1
+                        });
+                    }
                 },
                 error:(er) => {
-                    console.log(er);
+                     setMessageCallBack({
+                            description:er.responseText,
+                            type:2
+                        });
                 }
             });
 
@@ -126,9 +143,34 @@
            $("#modal").removeAttr("hidden");
            $("#modal").removeClass("modal hide");
            $("#modal").addClass("modal");
+           $('#cmp_telefone').mask('(00) 00000-0000');
            $("#fundo_backdrop").removeClass("backdrop hide");
            $("#fundo_backdrop").addClass("backdrop");
            $("#area-form").animate({scrollTop:'0px'})
     }
+
+
+
+  function setMessageCallBack({description , type}){
+        $("#alert-callback").removeAttr('class');
+
+        if(type == 1)
+        {
+            $("#alert-callback").attr('class','alert alert-success alert-dismissible fade show');
+        }
+        else { 
+            $("#alert-callback").attr('class','alert alert-danger alert-dismissible fade show');
+        }
+
+        $("#alert-callback").html(description + "  <button type=\"button\" class=\"close\" onClick=\"hideAlert()\"  aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>");
+        $("#alert-callback").show();
+    }
+
+
+    function hideAlert(){
+        $("#alert-callback").hide();
+    }
+
+
 
 </script>

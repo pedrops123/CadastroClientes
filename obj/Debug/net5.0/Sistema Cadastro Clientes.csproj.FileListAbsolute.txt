@@ -44,3 +44,7 @@ C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\runtimes\wi
 C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
 C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\FluentValidation.dll
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\FluentValidation.AspNetCore.dll
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\bin\Debug\net5.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\pvfurlan\Desktop\Sistema Cadastro Clientes\obj\Debug\net5.0\Sistema Cadastro Clientes.MvcApplicationPartsAssemblyInfo.cs

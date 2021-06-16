@@ -55,7 +55,7 @@ body
 
 #content{
   display: grid;
-  grid-template-rows:10vh 100fr
+  grid-template-rows:10vh auto 100fr
 }
 
 #footer {
@@ -74,6 +74,7 @@ body
 .grid-content > #cabecalho_grid {
   display: grid;
   grid-template-columns: repeat(auto-fill,16%);
+  justify-content: center;
 }
 
 .title_grid {
@@ -103,6 +104,7 @@ body
   display: grid;
   grid-template-columns: repeat(auto-fill,16%);
   height: fit-content;
+  justify-content: center;
 }
 
 
@@ -120,7 +122,18 @@ body
   width: 100%;
   top: 0;
 }
+#area-alert{
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+}
 
+
+#alert-callback{
+  width: 68%;
+  word-break: break-all;
+
+}
 
 @media screen and (max-width:500px){
   body {

@@ -165,14 +165,17 @@
     // Coleta os valores dos inputs do form cadastro Clientes
     function getValoresForm(){
         obj = {
+            
            CodCliente: $("#idCliente").val(),
            DescCliente: $("#cmp_nome").val(),
-           CodSexo:$("#cmp_sexo").val(),
+           CodSexo:parseInt($("#cmp_sexo").val()),
            Email:$("#cmp_email").val(),
            TelefoneCompleto:$("#cmp_telefone").val(),
            Endereco:$("#cmp_end").val(),
            Cidade:$("#cmp_cdd").val(),
-           CodPais:$("#cmp_pais").val()
+           CodPais:parseInt($("#cmp_pais").val()),
+           DDD:'',
+           Fone:''
          }
          return obj;
     }
@@ -182,7 +185,7 @@
           $("#cmp_nome").val(DescCliente);
           $("#cmp_sexo").val(CodSexo);
           $("#cmp_email").val(Email);
-          $("#cmp_telefone").val(TelefoneCompleto);
+          $("#cmp_telefone").mask('(00) 00000-0000').val(TelefoneCompleto).trigger('input');
           $("#cmp_end").val(Endereco);
           $("#cmp_cdd").val(Cidade);
           $("#cmp_pais").val(CodPais);
@@ -213,7 +216,7 @@
         }
 
         // Validacao Pais
-        if(objetoFormulario.CodPais == "0"){
+        if(objetoFormulario.CodPais == 0){
             $("#cmp_pais").addClass("is-invalid");
             validacao = false;
         }
@@ -222,7 +225,7 @@
         }
 
         // Validacao Sexo
-        if(objetoFormulario.CodSexo == "0"){
+        if(objetoFormulario.CodSexo == 0){
             $("#cmp_sexo").addClass("is-invalid");
             validacao = false;
         }
@@ -249,6 +252,7 @@
 
 
         // Validacao Endereco
+        /*
         if(objetoFormulario.Endereco == ""){
             $("#cmp_end").addClass("is-invalid");
             validacao = false;
@@ -257,6 +261,7 @@
             $("#cmp_end").removeClass("is-invalid");
         }
 
+        */
 
         // Validacao Telefone
         if(objetoFormulario.TelefoneCompleto == ""){
@@ -281,17 +286,28 @@
         if(validacao){
             $.ajax({
             method:'POST',
-            dataType: "json",
             url: 'Cliente/SalvaAtualizaCliente',
-            data:JSON.parse(objetoFormulario),
-            contentType: "application/json",
+            data:objetoFormulario,
                 success: (data) => {
-                    resetModalCadastro();
-                    AppendData();
-                    alert("Dados inseridos com sucesso !");
+                    if(data[0] == true){
+                        resetModalCadastro();
+                        AppendData();
+                        setMessageCallBack({
+                            description: data[1],
+                            type:1
+                        });
+                    }else {
+                        setMessageCallBack({
+                            description: data[1],
+                            type:2
+                        });
+                    }
                 },
-                error:(er) => {
-                    console.log(er);
+                error:(er,error ,message) => {
+                        setMessageCallBack({
+                            description:er.responseText,
+                            type:2
+                        });
                 }
             });
         }
